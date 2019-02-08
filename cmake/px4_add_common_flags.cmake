@@ -79,6 +79,8 @@ function(px4_add_common_flags)
 		-Wunknown-pragmas
 		-Wunused-variable
 
+		#-Wcast-align # TODO: fix and enable
+
 		# disabled warnings
 		-Wno-implicit-fallthrough # set appropriate level and update
 		-Wno-missing-field-initializers
@@ -97,6 +99,8 @@ function(px4_add_common_flags)
 			add_compile_options(
 				-Qunused-arguments
 
+				-Waddress-of-packed-member
+
 				-Wno-address-of-packed-member
 				-Wno-unknown-warning-option
 				-Wno-unused-const-variable
@@ -109,6 +113,10 @@ function(px4_add_common_flags)
 		if(CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 4.9)
 			# force color for gcc > 4.9
 			add_compile_options(-fdiagnostics-color=always)
+		endif()
+
+		if(CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 9)
+			add_compile_options(-Waddress-of-packed-member)
 		endif()
 
 		add_compile_options(

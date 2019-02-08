@@ -72,6 +72,8 @@ function(px4_os_add_flags)
 	# prevent using the toolchain's std c++ library
 	add_compile_options($<$<COMPILE_LANGUAGE:CXX>:-nostdinc++>)
 
+	add_compile_options(-mno-unaligned-access)
+
 	add_definitions(
 		-D__PX4_NUTTX
 		-D__DF_NUTTX
